@@ -5,15 +5,21 @@ const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const dotenv = require('dotenv').config();
 
+const authRoutes = require('./routes/authRouter');
+
 
 const app = express();
 const PORT = process.env.PORT;
+
+console.log("hello");
 
 app.use(cors()); 
 app.use(helmet());
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use('/api/auth',authRoutes);
 
 mongoose
     .connect(process.env.MONGO_URI)
